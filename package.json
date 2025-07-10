@@ -1,42 +1,44 @@
 {
-  "publisher": "WomB0ComB0",
   "name": "WomB0ComB0/vscode-ts-export",
   "displayName": "WomB0ComB0/vscode-ts-export",
   "version": "0.0.0",
-  "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.4.1",
   "description": "",
-  "author": "Mike Odnis <mike@mikeodnis.dev>",
-  "license": "MIT",
-  "funding": "https://github.com/sponsors/WomB0ComB0",
+  "categories": [
+    "Other"
+  ],
   "homepage": "https://github.com/WomB0ComB0/WomB0ComB0/vscode-ts-export#readme",
+  "bugs": {
+    "url": "https://github.com/WomB0ComB0/vscode-ts-export/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/WomB0ComB0/vscode-ts-export"
   },
-  "bugs": {
-    "url": "https://github.com/WomB0ComB0/vscode-ts-export/issues"
-  },
-  "sponsor": {
-    "url": "https://github.com/sponsors/WomB0ComB0"
-  },
-  "categories": [
-    "Other"
-  ],
+  "funding": "https://github.com/sponsors/WomB0ComB0",
+  "license": "MIT",
+  "author": "Mike Odnis <mike@mikeodnis.dev>",
+  "publisher": "WomB0ComB0",
+  "type": "module",
   "main": "./dist/index.js",
-  "icon": "res/icon.png",
   "files": [
     "LICENSE.md",
     "dist/*",
     "res/*"
   ],
-  "engines": {
-    "vscode": "^1.97.0"
+  "scripts": {
+    "build": "tsdown src/index.ts --external vscode",
+    "dev": "nr build --watch --sourcemap",
+    "lint": "eslint .",
+    "pack": "vsce package --no-dependencies",
+    "prepare": "nr update",
+    "publish": "vsce publish --no-dependencies",
+    "release": "bumpp && nr publish",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "update": "vscode-ext-gen --output src/generated/meta.ts",
+    "vscode:prepublish": "nr build"
   },
-  "activationEvents": [
-    "onStartupFinished"
-  ],
   "contributes": {
     "commands": [],
     "configuration": {
@@ -45,19 +47,9 @@
       "properties": {}
     }
   },
-  "scripts": {
-    "build": "tsdown src/index.ts --external vscode",
-    "dev": "nr build --watch --sourcemap",
-    "prepare": "nr update",
-    "update": "vscode-ext-gen --output src/generated/meta.ts",
-    "lint": "eslint .",
-    "vscode:prepublish": "nr build",
-    "publish": "vsce publish --no-dependencies",
-    "pack": "vsce package --no-dependencies",
-    "test": "vitest",
-    "typecheck": "tsc --noEmit",
-    "release": "bumpp && nr publish"
-  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "devDependencies": {
     "@antfu/eslint-config": "^4.2.1",
     "@antfu/ni": "^23.3.1",
@@ -75,6 +67,11 @@
     "vitest": "^3.0.5",
     "vscode-ext-gen": "^1.0.0"
   },
+  "packageManager": "pnpm@10.4.1",
+  "engines": {
+    "vscode": "^1.97.0"
+  },
+  "icon": "res/icon.png",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@vscode/vsce-sign",
@@ -82,5 +79,8 @@
       "keytar",
       "rolldown"
     ]
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/WomB0ComB0"
   }
 }
